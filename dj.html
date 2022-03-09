@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> DJ Console </title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="css/main.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	</head>
+	
+	<body  background="img/better-background.png">
+	<!--background="img/green-volume-background.png"
+	style="background-color:#8cdbac;
+	background-repeat=no-repeat background-size=cover-->
+		<p id="bla"></p>
+		<script src="https://www.w3.org/TR/2020/CR-webaudio-20200611/"></script>
+		<table class="center" width="1360px">
+			<tr>
+				<td id="one_one">
+					<!--<img src = "images/deck.png" id = "deck1" style="width:300px;height:300px;">-->
+					<div class="deckcontainer" id="deck1">
+						<div class="scratchercontainer" id="scratcher1">
+							<img class="base" src="img/base.png" alt="=DiskBase"></img>
+							<img class="back" src="img/disk_back.png" alt="=DiskBack"></img>
+							<img id="disk1" onerror="this.style.display='none'"></img>
+							<img id="bar1" src="img/bar.png" alt="=Bar"></img>
+						</div>
+						<div class="pitchcontainer" id="div1">
+							<b>Pitch:</b>
+							<input type="range" min="0.5" max="1.5" step="0.05" value="1" class="slider" id="pitch1" orient="vertical">
+						</div>
+					</div>
+				</td>
+				<td id="one_two">
+					<!--<img src = "images/deck.png" id = "deck2" style="width:300px;height:300px;">-->
+					<div class="deckcontainer" id="deck2">
+						<div class="scratchercontainer" id="scratcher2"></div>
+							<img class="base" src="img/base.png" alt="=DiskBase"></img>
+							<img class="back" src="img/disk_back.png" alt="=DiskBack"></img>
+							<img id="disk2" onerror="this.style.display='none'"></img>
+							<img id="bar2" src="img/bar.png" alt="=Bar"></img>
+						</div>
+						<div class="pitchcontainer" id="div2">
+							<b>Pitch:</b>
+							<input type="range" min="0.5" max="1.5" step="0.05" value="1" class="slider" id="pitch2" orient="vertical">
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<canvas id="canva1" height="75" width="450" style="border:1px solid #000000;"></canvas>
+				</td>
+				<td>
+					<canvas id="canva2" height="75" width="450" style="border:1px solid #000000;"></canvas>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="buttoncontainer">
+						<input type="image" src="img/play-button.png" class="button" id="play1" height="50px" width="50px"/>
+						<input type="image" src="img/stop-button.png" class="button" id="stop1" height="50px" width="50px"/>
+					</div>
+				</td>
+				<td>
+					<div class="buttoncontainer">
+						<input type="image" src="img/play-button.png" class="button" id="play2" height="50px" width="50px"/>
+						<input type="image" src="img/stop-button.png" class="button" id="stop2" height="50px" width="50px"/>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th colspan="2" class="wrapper">
+					<canvas id="myCanvas" height = 260 width=1350px style="border:1px solid #000000;"></canvas>
+					<canvas id="myCanvas2" height = 260 width=1350px style="border:1px solid #000000;"></canvas>
+				</th>
+			</tr>
+			<tr>
+				<!-- <th>
+					<button class="btn" id="distortion1" >Distortion</button>
+				</th> -->
+				<th>
+					Gain:
+					<div class="slidecontainer">
+						<input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="gain1">
+					</div>
+				</th>
+				<!-- <th>
+					<button class="btn" id="distortion1" >Distortion</button>
+				</th> -->
+				<th>
+					Gain:
+					<div class="slidecontainer">
+						<input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="gain2">
+					</div>
+				</th>
+			</tr>
+			<tr>
+				<th>
+					Bass:
+					<div class="slidecontainer">
+						<input type="range" min="-20" max="20" value="0" step="1" class="slider" id="bass1">
+					</div>
+				</th>
+				<th>
+					Bass:
+					<div class="slidecontainer">
+						<input type="range" min="-20" max="20" value="0" step="1" class="slider" id="bass2">
+					</div>
+				</th>
+			</tr>
+			<tr>
+				<th>
+					Middle:
+					<div class="slidecontainer">
+						<input type="range" min="-10" max="10" value="0" step ="0.1" class="slider" id="middle1">
+					</div>
+				</th>
+				<th>
+					Middle:
+					<div class="slidecontainer">
+						<input type="range" min="-10" max="10" value="0" step="0.1" class="slider" id="middle2">
+					</div>
+				</th>
+			</tr>
+			<tr>
+				<th>
+					Treble:
+					<div class="slidecontainer">
+						<input type="range" min="-20" max="20" value="0" step="1" class="slider" id="treble1">
+					</div>
+				</th>
+				<th>
+					Treble:
+					<div class="slidecontainer">
+						<input type="range" min="-20" max="20" value="0" step="1" class="slider" id="treble2">
+					</div>
+				</th>
+			</tr>
+			<tr>
+				<th>
+					Tremolo:
+					<div class="slidecontainer">
+						<input type="range" min="0" max="15" value="0" step="0.1" class="slider" id="tremolo1">
+					</div>
+				</th>
+				<th>
+					Tremolo:
+					<div class="slidecontainer">
+						<input type="range" min="0" max="15" value="0" step="0.1" class="slider" id="tremolo2">
+					</div>
+				</th>
+			</tr>
+			<tr>
+				<th>
+					Frequency Pass:
+					<div class="slidecontainer">
+						<input type="range" min="0" max="20" value="10" step="1" class="slider" id="freqpass1">
+					</div>
+				</th>
+				<th>
+					Frequency Pass:
+					<div class="slidecontainer">
+						<input type="range" min="0" max="20" value="10" step="1" class="slider" id="freqpass2">
+					</div>
+				</th>
+			</tr>
+			<tr>
+				<th>
+					Dynamics Compression:
+					<div class="buttoncontainer">
+						<input data-active="false" type="image" src="img/compression-button-disabled.jpg" class="button" id="compressor1" height="70px" width="100px"/>
+					</div>
+				</th>
+				<th>
+					Dynamics Compression:
+					<div class="buttoncontainer">
+						<input data-active="false" type="image" src="img/compression-button-disabled.jpg" class="button" id="compressor2" height="70px" width="100px"/>
+					</div>
+				</th>
+			</tr>
+			<tr>
+				<th>
+					<div class="checkboxcontainer">
+						<input type="checkbox" id="loop1" value="Yes">
+						<label for="loop1"> Loop</label><br>
+					</div>
+				</th>
+				<th>
+					<div class="checkboxcontainer">
+						<input type="checkbox" id="loop2" value="Yes">
+						<label for="loop2"> Loop</label><br>
+					</div>
+				</th>
+			</tr>
+			<tr>
+				<td id="filters">
+					<button class="btn" id="distortion1" >Distortion</button>
+					<button class="btn" id="delay1" >Delay</button>
+         			<button class="btn" id="echo1" >Echo</button>
+         			<button class="btn" id="PW1">Periodic Wave</button>
+					<button class="btn" id="cut1">Cut</button>
+				</td>
+				<td id="filters">
+					<button class="btn" id="distortion2" >Distortion</button>
+					<button class="btn" id="delay2" >Delay</button>
+					<button class="btn" id="echo2">Echo</button>
+					<button class="btn" id="PW2">Periodic Wave</button>
+					<button class="btn" id="cut2">Cut</button>
+				</td>
+			</tr>
+		</table>
+		<table class="center" id="crossfader-table" width="1000px">
+			<tr>
+				<th>
+					Crossfader:
+					<div class="slidecontainer" >
+						<input type="range" min="0" max="1" value="0.5" step="0.01" class="slider" id="crossfader" style="width:500px;" >
+					</div>
+				</th>
+			</tr>
+		</table>
+		<table class="center" id="list-table" width="1000px">
+			<tr>
+				<th>
+					<input type="file" id="file-input1" webkitdirectory directory multiple accept="audio/*"/>
+					<div class="songsList" id="list1">
+						<!-- <a href="#" id="song1"></a>
+						<a href="#" id="song2"></a>
+						<a href="#" id="song3"></a>
+						<a href="#" id="song4"></a> -->
+					</div>
+					<audio id="audio1"></audio>
+				</th>
+				<th>
+					<input type="file" id="file-input2" webkitdirectory directory multiple accept="audio/*"/>
+					<div class="songsList" id="list2">
+						<!-- <a href="#" id="song5"></a>
+						<a href="#" id="song6"></a>
+						<a href="#" id="song7"></a>
+						<a href="#" id="song8"></a> -->
+					</div>
+					<audio id="audio2"></audio>
+				</th>
+			</tr>
+		</table>
+		<script src="js/main.js"></script>
+	</body>
+	
+
+</html>
